@@ -59,7 +59,7 @@ class GalleryActivity : Activity(), View.OnClickListener {
             val originalFilter = gpuImageView.filter
             if (originalFilter is GPUImageFilterGroup) {
                 val filters = originalFilter.filters
-                gpuImageAdjustFilterGroup = filters[1] as GPUImageAdjustFilterGroup
+                gpuImageAdjustFilterGroup = filters?.get(1) as GPUImageAdjustFilterGroup
                 mCheckedId = checkedId
                 when (checkedId) {
                     R.id.fragment_radio_contrast -> {
@@ -130,7 +130,7 @@ class GalleryActivity : Activity(), View.OnClickListener {
     private fun getFilterList(
         originalFilter: GPUImageFilter,
         gpuImageAdjustFilterGroup: GPUImageAdjustFilterGroup
-    ): List<GPUImageFilter> {
+    ): MutableList<GPUImageFilter> {
         val groupFilters: MutableList<GPUImageFilter> = ArrayList(2)
         groupFilters.add(originalFilter)
         groupFilters.add(gpuImageAdjustFilterGroup)
@@ -153,7 +153,7 @@ class GalleryActivity : Activity(), View.OnClickListener {
         fragmentAdjustRadiogroup.clearCheck()
         val originalFilter = gpuImageView.filter
         if (originalFilter is GPUImageFilterGroup) {
-            val gpuImageFilter = originalFilter.filters[0]
+            val gpuImageFilter = originalFilter.filters?.get(0)
             if (gpuImageFilter == null || gpuImageFilter.javaClass != filter.javaClass) {
                 gpuImageView.filter =
                     GPUImageFilterGroup(getFilterList(filter, GPUImageAdjustFilterGroup()))
