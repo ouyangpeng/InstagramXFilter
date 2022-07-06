@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.poney.gpuimage.filter.group.GPUImageAdjustFilterGroup
 import android.os.Bundle
 import com.poney.gpuimage.R
-import butterknife.ButterKnife
 import com.poney.gpuimage.filter.base.GPUImageParams
 import com.poney.gpuimage.filter.base.GPUImageFilter
 import com.poney.gpuimage.filter.group.GPUImageFilterGroup
@@ -32,18 +31,6 @@ class GalleryActivity : Activity(), View.OnClickListener {
 
     private val seekBar: SeekBar by lazy { findViewById(R.id.seekBar) }
 
-//    val fragmentRadioContrast: RadioButton by lazy { findViewById(R.id.fragment_radio_contrast) }
-//
-//    val fragmentRadioExposure: RadioButton by lazy { findViewById(R.id.fragment_radio_exposure) }
-//
-//    val fragmentRadioSaturation: RadioButton by lazy { findViewById(R.id.fragment_radio_saturation) }
-//
-//    val fragmentRadioSharpness: RadioButton by lazy { findViewById(R.id.fragment_radio_sharpness) }
-//
-//    val fragmentRadioBright: RadioButton by lazy { findViewById(R.id.fragment_radio_bright) }
-//
-//    val fragmentRadioHue: RadioButton by lazy { findViewById(R.id.fragment_radio_hue) }
-
     private val fragmentAdjustRadiogroup: RadioGroup by lazy { findViewById(R.id.fragment_adjust_radiogroup) }
 
     private val filterAdjust: LinearLayout by lazy { findViewById(R.id.filter_adjust) }
@@ -54,7 +41,6 @@ class GalleryActivity : Activity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery)
-        ButterKnife.bind(this)
         GPUImageParams.init(this)
         initAction()
         initFilterList()
