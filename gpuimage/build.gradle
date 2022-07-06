@@ -35,6 +35,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation dependenciesConfig.butterknife
+    implementation 'androidx.exifinterface:exifinterface:1.3.2'
     annotationProcessor dependenciesConfig.butterknifeannotation
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
