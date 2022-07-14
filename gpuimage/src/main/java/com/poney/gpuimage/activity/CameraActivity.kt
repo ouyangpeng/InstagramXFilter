@@ -115,31 +115,37 @@ class CameraActivity : Activity(), View.OnClickListener {
                 gpuImageAdjustFilterGroup = filters?.get(1) as GPUImageAdjustFilterGroup
                 mCheckedId = checkedId
                 when (checkedId) {
+                    // 对比度
                     R.id.fragment_radio_contrast -> {
                         val contrastProgress: Int = gpuImageAdjustFilterGroup.contrastProgress
                         seekBar.progress = contrastProgress
                         gpuImageAdjustFilterGroup.setContrast(contrastProgress)
                     }
+                    // 饱和度
                     R.id.fragment_radio_saturation -> {
                         val saturationProgress: Int = gpuImageAdjustFilterGroup.saturationProgress
                         seekBar.progress = saturationProgress
                         gpuImageAdjustFilterGroup.setSaturation(saturationProgress)
                     }
+                    // 曝光
                     R.id.fragment_radio_exposure -> {
                         val exposureProgress: Int = gpuImageAdjustFilterGroup.exposureProgress
                         seekBar.progress = exposureProgress
                         gpuImageAdjustFilterGroup.setExposure(exposureProgress)
                     }
+                    // 锐化
                     R.id.fragment_radio_sharpness -> {
                         val sharpnessProgress: Int = gpuImageAdjustFilterGroup.sharpnessProgress
                         seekBar.progress = sharpnessProgress
                         gpuImageAdjustFilterGroup.setSharpness(sharpnessProgress)
                     }
+                    // 亮度
                     R.id.fragment_radio_bright -> {
                         val brightnessProgress: Int = gpuImageAdjustFilterGroup.brightnessProgress
                         seekBar.progress = brightnessProgress
                         gpuImageAdjustFilterGroup.setBrightness(brightnessProgress)
                     }
+                    // 色调
                     R.id.fragment_radio_hue -> {
                         val hueProgress: Int = gpuImageAdjustFilterGroup.hueProgress
                         seekBar.progress = hueProgress
@@ -153,21 +159,27 @@ class CameraActivity : Activity(), View.OnClickListener {
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 when (mCheckedId) {
+                    // 对比度
                     R.id.fragment_radio_contrast -> {
                         gpuImageAdjustFilterGroup.setContrast(progress)
                     }
+                    // 饱和度
                     R.id.fragment_radio_saturation -> {
                         gpuImageAdjustFilterGroup.setSaturation(progress)
                     }
+                    // 曝光
                     R.id.fragment_radio_exposure -> {
                         gpuImageAdjustFilterGroup.setExposure(progress)
                     }
+                    // 锐化
                     R.id.fragment_radio_sharpness -> {
                         gpuImageAdjustFilterGroup.setSharpness(progress)
                     }
+                    // 亮度
                     R.id.fragment_radio_bright -> {
                         gpuImageAdjustFilterGroup.setBrightness(progress)
                     }
+                    // 色调
                     R.id.fragment_radio_hue -> {
                         gpuImageAdjustFilterGroup.setHue(progress)
                     }

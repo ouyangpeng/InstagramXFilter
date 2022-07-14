@@ -90,27 +90,36 @@ open class GPUImageFilter @JvmOverloads constructor(
         cubeBuffer.position(0)
         GLES20.glVertexAttribPointer(attribPosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer)
         GLES20.glEnableVertexAttribArray(attribPosition)
+
         textureBuffer.position(0)
         GLES20.glVertexAttribPointer(
             attribTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
             textureBuffer
         )
         GLES20.glEnableVertexAttribArray(attribTextureCoordinate)
+
         if (textureId != OpenGlUtils.NO_TEXTURE) {
             GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId)
             GLES20.glUniform1i(uniformTexture, 0)
         }
+
         onDrawArraysPre()
+
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
+
         GLES20.glDisableVertexAttribArray(attribPosition)
         GLES20.glDisableVertexAttribArray(attribTextureCoordinate)
+
         onDrawArraysAfter()
+
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
     }
 
     protected open fun onDrawArraysPre() {}
+
     protected open fun onDrawArraysAfter() {}
+
     protected fun runPendingOnDrawTasks() {
         synchronized(runOnDraw) {
             while (!runOnDraw.isEmpty()) {
@@ -224,7 +233,7 @@ open class GPUImageFilter @JvmOverloads constructor(
             return ""
         }
 
-        fun convertStreamToString(`is`: InputStream?): String {
+        private fun convertStreamToString(`is`: InputStream?): String {
             val s = Scanner(`is`).useDelimiter("\\A")
             return if (s.hasNext()) s.next() else ""
         }

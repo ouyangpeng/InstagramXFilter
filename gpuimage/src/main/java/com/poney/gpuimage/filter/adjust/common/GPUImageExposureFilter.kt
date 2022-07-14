@@ -20,6 +20,7 @@ import com.poney.gpuimage.filter.base.GPUImageAdjustFilter
 import android.opengl.GLES20
 
 /**
+ * 曝光
  * exposure: The adjusted exposure (-10.0 - 10.0, with 0.0 as the default)
  */
 class GPUImageExposureFilter @JvmOverloads constructor(private var exposure: Float = 0.0f) :

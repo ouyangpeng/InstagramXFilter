@@ -15,6 +15,7 @@ class GPUImageAmaroFilter :
     private val inputTextureHandles = intArrayOf(-1, -1, -1)
     private val inputTextureUniformLocations = intArrayOf(-1, -1, -1)
     private var mGLStrengthLocation = 0
+
     override fun onDestroy() {
         super.onDestroy()
         GLES20.glDeleteTextures(inputTextureHandles.size, inputTextureHandles, 0)
@@ -47,12 +48,11 @@ class GPUImageAmaroFilter :
 
     override fun onInit() {
         super.onInit()
-        for (i in inputTextureUniformLocations.indices) inputTextureUniformLocations[i] =
-            GLES20.glGetUniformLocation(program, "inputImageTexture" + (2 + i))
-        mGLStrengthLocation = GLES20.glGetUniformLocation(
-            program,
-            "strength"
-        )
+        for (i in inputTextureUniformLocations.indices)
+            inputTextureUniformLocations[i] =
+                GLES20.glGetUniformLocation(program, "inputImageTexture" + (2 + i))
+
+        mGLStrengthLocation = GLES20.glGetUniformLocation(program, "strength")
     }
 
     override fun onInitialized() {

@@ -35,7 +35,8 @@ class GalleryActivity : Activity(), View.OnClickListener {
 
     private val filterAdjust: LinearLayout by lazy { findViewById(R.id.filter_adjust) }
 
-    private var gpuImageAdjustFilterGroup: GPUImageAdjustFilterGroup? = null
+    private lateinit var gpuImageAdjustFilterGroup: GPUImageAdjustFilterGroup
+
     private var mCheckedId = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,35 +63,41 @@ class GalleryActivity : Activity(), View.OnClickListener {
                 gpuImageAdjustFilterGroup = filters?.get(1) as GPUImageAdjustFilterGroup
                 mCheckedId = checkedId
                 when (checkedId) {
+                    // 对比度
                     R.id.fragment_radio_contrast -> {
-                        val contrastProgress = gpuImageAdjustFilterGroup!!.contrastProgress
+                        val contrastProgress: Int = gpuImageAdjustFilterGroup.contrastProgress
                         seekBar.progress = contrastProgress
-                        gpuImageAdjustFilterGroup!!.setContrast(contrastProgress)
+                        gpuImageAdjustFilterGroup.setContrast(contrastProgress)
                     }
+                    // 饱和度
                     R.id.fragment_radio_saturation -> {
-                        val saturationProgress = gpuImageAdjustFilterGroup!!.saturationProgress
+                        val saturationProgress: Int = gpuImageAdjustFilterGroup.saturationProgress
                         seekBar.progress = saturationProgress
-                        gpuImageAdjustFilterGroup!!.setSaturation(saturationProgress)
+                        gpuImageAdjustFilterGroup.setSaturation(saturationProgress)
                     }
+                    // 曝光
                     R.id.fragment_radio_exposure -> {
-                        val exposureProgress = gpuImageAdjustFilterGroup!!.exposureProgress
+                        val exposureProgress: Int = gpuImageAdjustFilterGroup.exposureProgress
                         seekBar.progress = exposureProgress
-                        gpuImageAdjustFilterGroup!!.setExposure(exposureProgress)
+                        gpuImageAdjustFilterGroup.setExposure(exposureProgress)
                     }
+                    // 锐化
                     R.id.fragment_radio_sharpness -> {
-                        val sharpnessProgress = gpuImageAdjustFilterGroup!!.sharpnessProgress
+                        val sharpnessProgress: Int = gpuImageAdjustFilterGroup.sharpnessProgress
                         seekBar.progress = sharpnessProgress
-                        gpuImageAdjustFilterGroup!!.setSharpness(sharpnessProgress)
+                        gpuImageAdjustFilterGroup.setSharpness(sharpnessProgress)
                     }
+                    // 亮度
                     R.id.fragment_radio_bright -> {
-                        val brightnessProgress = gpuImageAdjustFilterGroup!!.brightnessProgress
+                        val brightnessProgress: Int = gpuImageAdjustFilterGroup.brightnessProgress
                         seekBar.progress = brightnessProgress
-                        gpuImageAdjustFilterGroup!!.setBrightness(brightnessProgress)
+                        gpuImageAdjustFilterGroup.setBrightness(brightnessProgress)
                     }
+                    // 色调
                     R.id.fragment_radio_hue -> {
-                        val hueProgress = gpuImageAdjustFilterGroup!!.hueProgress
+                        val hueProgress: Int = gpuImageAdjustFilterGroup.hueProgress
                         seekBar.progress = hueProgress
-                        gpuImageAdjustFilterGroup!!.setHue(hueProgress)
+                        gpuImageAdjustFilterGroup.setHue(hueProgress)
                     }
                 }
             }
@@ -98,25 +105,30 @@ class GalleryActivity : Activity(), View.OnClickListener {
 
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (gpuImageAdjustFilterGroup == null) return
                 when (mCheckedId) {
+                    // 对比度
                     R.id.fragment_radio_contrast -> {
-                        gpuImageAdjustFilterGroup!!.setContrast(progress)
+                        gpuImageAdjustFilterGroup.setContrast(progress)
                     }
+                    // 饱和度
                     R.id.fragment_radio_saturation -> {
-                        gpuImageAdjustFilterGroup!!.setSaturation(progress)
+                        gpuImageAdjustFilterGroup.setSaturation(progress)
                     }
+                    // 曝光
                     R.id.fragment_radio_exposure -> {
-                        gpuImageAdjustFilterGroup!!.setExposure(progress)
+                        gpuImageAdjustFilterGroup.setExposure(progress)
                     }
+                    // 锐化
                     R.id.fragment_radio_sharpness -> {
-                        gpuImageAdjustFilterGroup!!.setSharpness(progress)
+                        gpuImageAdjustFilterGroup.setSharpness(progress)
                     }
+                    // 亮度
                     R.id.fragment_radio_bright -> {
-                        gpuImageAdjustFilterGroup!!.setBrightness(progress)
+                        gpuImageAdjustFilterGroup.setBrightness(progress)
                     }
+                    // 色调
                     R.id.fragment_radio_hue -> {
-                        gpuImageAdjustFilterGroup!!.setHue(progress)
+                        gpuImageAdjustFilterGroup.setHue(progress)
                     }
                 }
                 gpuImageView.requestRender()

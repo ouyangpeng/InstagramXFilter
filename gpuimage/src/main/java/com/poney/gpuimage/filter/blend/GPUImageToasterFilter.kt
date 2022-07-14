@@ -59,8 +59,7 @@ class GPUImageToasterFilter : GPUImageBlendFilter(
         super.onInitialized()
         setFloat(mGLStrengthLocation, 1.0f)
         runOnDraw {
-            inputTextureHandles[0] =
-                loadTexture(GPUImageParams.sContext!!, "filter/toastermetal.png")
+            inputTextureHandles[0] =loadTexture(GPUImageParams.sContext!!, "filter/toastermetal.png")
             inputTextureHandles[1] =
                 loadTexture(GPUImageParams.sContext!!, "filter/toastersoftlight.png")
             inputTextureHandles[2] =

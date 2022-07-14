@@ -40,6 +40,7 @@ open class GPUImageFilterGroup @JvmOverloads constructor(var filters: MutableLis
     private val glCubeBuffer: FloatBuffer
     private val glTextureBuffer: FloatBuffer
     private val glTextureFlipBuffer: FloatBuffer
+
     fun addFilter(aFilter: GPUImageFilter?) {
         if (aFilter == null) {
             return
@@ -160,16 +161,20 @@ open class GPUImageFilterGroup @JvmOverloads constructor(var filters: MutableLis
                     GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffers!![i])
                     GLES20.glClearColor(0f, 0f, 0f, 0f)
                 }
-                if (i == 0) {
-                    filter.onDraw(previousTexture, cubeBuffer, textureBuffer)
-                } else if (i == size - 1) {
-                    filter.onDraw(
-                        previousTexture,
-                        glCubeBuffer,
-                        if (size % 2 == 0) glTextureFlipBuffer else glTextureBuffer
-                    )
-                } else {
-                    filter.onDraw(previousTexture, glCubeBuffer, glTextureBuffer)
+                when (i) {
+                    0 -> {
+                        filter.onDraw(previousTexture, cubeBuffer, textureBuffer)
+                    }
+                    size - 1 -> {
+                        filter.onDraw(
+                            previousTexture,
+                            glCubeBuffer,
+                            if (size % 2 == 0) glTextureFlipBuffer else glTextureBuffer
+                        )
+                    }
+                    else -> {
+                        filter.onDraw(previousTexture, glCubeBuffer, glTextureBuffer)
+                    }
                 }
                 if (isNotLast) {
                     GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0)
@@ -215,15 +220,18 @@ open class GPUImageFilterGroup @JvmOverloads constructor(var filters: MutableLis
         } else {
             updateMergedFilters()
         }
+
         glCubeBuffer = ByteBuffer.allocateDirect(GPUImageRenderer.CUBE.size * 4)
             .order(ByteOrder.nativeOrder())
             .asFloatBuffer()
         glCubeBuffer.put(GPUImageRenderer.CUBE).position(0)
+
         glTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_NO_ROTATION.size * 4)
             .order(ByteOrder.nativeOrder())
             .asFloatBuffer()
         glTextureBuffer.put(TEXTURE_NO_ROTATION).position(0)
-        val flipTexture = getRotation(Rotation.NORMAL, false, true)
+
+        val flipTexture = getRotation(Rotation.NORMAL, flipHorizontal = false, flipVertical = true)
         glTextureFlipBuffer = ByteBuffer.allocateDirect(flipTexture.size * 4)
             .order(ByteOrder.nativeOrder())
             .asFloatBuffer()
